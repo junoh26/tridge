@@ -3,6 +3,17 @@ import pandas as pd
 
 
 df = pd.read_csv('dataSet.csv')
+
+"""
+First, we should delete parts of the values for Variety column and Grades column.
+EX: Avocado / Variety / Hass -> Hass
+    Avocado / Grade / Second Quality -> Second Quality
+
+Pseudo Code:
+df['Variety'].replace(r"\w \bVariety\b ", "", inplace=True)
+df['Grades'].replace(r"\w \bGrade\b ", "", inplace=True)
+"""
+
 print(df.isna().sum() / len(df) * 100)
 """
 By checking the percentage of missing values in each column,
@@ -42,4 +53,7 @@ data as they are for the rest.
     duplicateRows = df.groupby(["Product", "Country", "Variety", "Grades", "Region"])
                         .agg({every weakly price column: 'mean'})
 
+Regarding possible normalization methods, I am not sure whether we need to use
+normalization methods such as MinMax and Z-Score if we are not trying to construct
+any machine learning models. 
 """
